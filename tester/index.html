@@ -48,10 +48,9 @@ python3 -m http.server --bind 127.0.0.1 8000
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-4"></div>
-        <div class="col-4" id="game-iframe-target"></div>
-        <div class="col-4"></div>
+    <div class="d-flex justify-content-center">
+        <div id="game-iframe-target" class="embed-responsive">
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
@@ -63,6 +62,7 @@ python3 -m http.server --bind 127.0.0.1 8000
             iframeElement.setAttribute("src", iframeURL);
             iframeElement.style.width = "640px";
             iframeElement.style.height = "480px";
+            iframeElement.classList.add("embed-responsive-item")
             targetElement.appendChild(iframeElement);
         }
 
