@@ -40,8 +40,6 @@ python3 -m http.server --bind 127.0.0.1 8000
             <form>
                 <label for="game-select">Choose a game:</label>
                 <select id="game-select" class="form-select mb-3" aria-describedby="game-select-help">
-                    <!-- <option value="1" selected="true">Rocket 1</option>
-                    <option value="2">Rocket 2</option> -->
                 </select>
                 <div id="game-select-help" class="form-text">TBD</div>
 
@@ -83,8 +81,6 @@ python3 -m http.server --bind 127.0.0.1 8000
 
             const games = await response.json();
 
-            console.log(games.items);
-
             return games.items;
         }
 
@@ -93,10 +89,8 @@ python3 -m http.server --bind 127.0.0.1 8000
                 method: "POST",
                 headers: new Headers({
                     'Authorization': `Bearer ${authorizationToken}`,
-                    // 'Content-Type': 'application/json; charset=utf-8',
                     'Accept': 'application/json; charset=utf-8',
                 }),
-                // body: JSON.stringify({}),
             });
 
             if (!startGameInfoResponse.ok) {
@@ -132,10 +126,12 @@ python3 -m http.server --bind 127.0.0.1 8000
             fetchGames(backendUrl, authorizationToken)
                 .then(function (games) {
                     for (const game of games) {
-                        const optionElement = document.createElement("option", {});
-                        optionElement.value = game.id;
-                        optionElement.title = game.description;
-                        optionElement.innerText = game.name;
+                        const { id, name, description, imageUrl } = game;
+
+                        const optionElement = document.createElement("option");
+                        optionElement.value = id;
+                        optionElement.title = description;
+                        optionElement.innerText = name;
                         gameSelectElement.appendChild(optionElement);
                     }
 
@@ -190,15 +186,15 @@ python3 -m http.server --bind 127.0.0.1 8000
                 });
         }
 
-        window.onload = function() {
+        window.onload = function () {
             const authorizationToken = localStorage.getItem("authorizationToken");
-            if(authorizationToken !== null) {
+            if (authorizationToken !== null) {
                 const authTokenInputElement = document.getElementById('auth-token');
                 authTokenInputElement.value = authorizationToken;
             }
 
             const selectedBackendIndex = localStorage.getItem("selectedBackendIndex");
-            if(selectedBackendIndex !== null && Number.parseInt(selectedBackendIndex).toString() === selectedBackendIndex) {
+            if (selectedBackendIndex !== null && Number.parseInt(selectedBackendIndex).toString() === selectedBackendIndex) {
                 const backendSelectElement = document.getElementById('backend-select');
                 backendSelectElement.selectedIndex = Number.parseInt(selectedBackendIndex);
             }
