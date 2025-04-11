@@ -25,7 +25,21 @@ python3 -m http.server --bind 127.0.0.1 8000
                     </option>
                     <option value="https://game-api-v2.xoob.gg/api/">https://game-api-v2.xoob.gg/api/ (prod)</option>
                 </select>
-                <div id="backend-select-help" class="form-text">TBD</div>
+                <div id="backend-select-help" class="form-text">
+                    <ul>
+                        <li>
+                            For <b>local</b> you may use Bearer Token <code>00000000-0000-0000-0000-000000000000</code> after execute
+                            following Redis command:
+                            <code>
+                                                                SET tg_session:00000000-0000-0000-0000-000000000000 867014308
+                                                            </code>
+                            where <code>867014308</code> is your Telegram user id
+                        </li>
+                        <li>
+                            For <b>prod</b>/<b>test</b> you may grab token using <a href="https://web.telegram.org/k/">Telegram Web</a>.
+                        </li>
+                    </ul>
+                </div>
 
                 <div class="mb-3">
                     <label for="auth-token" class="form-label">Set Authorization Bearer</label>
